@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 import 'dart:math';
+import 'package:app_cadastro/components/user_edit.dart';
+import 'package:flutter/widgets.dart';
+
 import '/components/user_form.dart';
 import '/components/user_list.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +14,20 @@ main() => runApp(CadastroApp());
 class CadastroApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
- 
+    final ThemeData tema = ThemeData();
+
     return MaterialApp(
       home: MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.blue,
+          secondary: Colors.blue[200],
         ),
+
         textTheme: TextTheme(
           titleLarge: const TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
@@ -40,7 +44,10 @@ class MyHomePage extends StatefulWidget {
 }
  
 class _MyHomePageState extends State<MyHomePage> {
-  final _users = [
+
+  String idOnEdit = '';
+
+  var _users = [
     User(
       id: 't1',
       name: 'teste',
@@ -76,7 +83,39 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
- 
+  _editUser(String id, String name, String number, DateTime date, String email, String document) {
+    final newUser = User(
+      id: idOnEdit,
+      name: name,
+      number: number, 
+      date: date,
+      email: email,
+      document: document,
+    );
+
+    for (var i = 0; i< _users.length; i++) {
+      if(_users[i].id == idOnEdit){
+          setState(() {
+          _users.removeAt(i);
+          _users.insert(i, newUser);
+        });
+      }
+    }
+    Navigator.of(context).pop();
+  }
+
+
+  _openEditModal(String id, String name, String email, DateTime date, String number, String document) {
+    idOnEdit = id;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) {
+        return UserEdit(_editUser);
+      },
+    );
+  }
+
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -86,6 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
  
   @override
   Widget build(BuildContext context) {
@@ -97,17 +137,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Gráfico'),
-                elevation: 5,
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(
+                  'Lista de Usuarios',
+                  style: TextStyle(fontSize: 18),
+                ),
+                ],
+                
               ),
             ),
-            UserList(_users, _deleteUser),
+            
+            UserList(_users, _deleteUser, _openEditModal),
           ],
         ),
       ),

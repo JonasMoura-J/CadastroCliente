@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app_cadastro/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

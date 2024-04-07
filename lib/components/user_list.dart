@@ -2,17 +2,26 @@
 
 import 'dart:math';
 
+import 'package:app_cadastro/components/user_edit.dart';
+import 'package:app_cadastro/components/user_form.dart';
 import 'package:app_cadastro/components/user_visualization.dart';
 import 'package:app_cadastro/models/user.dart';
 import 'package:flutter/material.dart';
 
-class UserList extends StatelessWidget {
+class UserList extends StatefulWidget {
   
 
-  final List<User> transactions;
+  final List<User> users;
   final void Function(String) onRemove;
+  final void Function(String, String, String, DateTime, String, String) onEdit;
 
-  UserList(this.transactions, this.onRemove);
+  UserList(this.users, this.onRemove, this.onEdit);
+
+  @override
+  State<UserList> createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
 
   _openUserModal(BuildContext context, User user) {
     showModalBottomSheet(
@@ -27,11 +36,15 @@ class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
+      width: double.infinity,
+   
       height: 600,
       child: ListView.builder(
-        itemCount: transactions.length,
+        
+        itemCount: widget.users.length,
         itemBuilder: (ctx, index){
-          final tr = transactions[index];
+          final tr = widget.users[index];
           return Card(
             elevation: 5,
             margin: EdgeInsets.symmetric(
@@ -55,12 +68,14 @@ class UserList extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.edit),
                     color: Theme.of(context).colorScheme.primary,
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onEdit(tr.id, tr.name, tr.email, tr.date, tr.number, tr.document);
+                    }
                   ),
                   IconButton(
                     icon: Icon(Icons.delete),
                     color: Theme.of(context).colorScheme.error,
-                    onPressed: () => onRemove(tr.id),
+                    onPressed: () => widget.onRemove(tr.id),
                   )
                 ]
               ),

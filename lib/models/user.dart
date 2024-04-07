@@ -5,7 +5,7 @@ class User {
   final DateTime date;
   final String email;
   final String document;
- 
+
   User({
     required this.id,
     required this.name,
