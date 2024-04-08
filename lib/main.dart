@@ -56,6 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
       document: "29839898"
     ),
+    User(
+      id: 't2',
+      name: 'Jonas',
+      number: '2190000000',
+      email: 'jonas@gmail',
+      date: DateTime.now(),
+      document: "29839898"
+    ),
   ];
  
   void _addUser(String name, String number, DateTime date, String email, String document) {
@@ -108,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _openEditModal(String id, String name, String email, DateTime date, String number, String document) {
     idOnEdit = id;
     showModalBottomSheet(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
       builder: (_) {
@@ -117,9 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _openTransactionFormModal(BuildContext context) {
+  _openCreateFormModal(BuildContext context) {
     showModalBottomSheet(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
       builder: (_) {
@@ -162,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context),
+        onPressed: () => _openCreateFormModal(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

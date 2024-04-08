@@ -25,6 +25,7 @@ class _UserListState extends State<UserList> {
 
   _openUserModal(BuildContext context, User user) {
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
       builder: (_) {
