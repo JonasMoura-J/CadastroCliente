@@ -21,7 +21,7 @@ class CadastroApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.blue,
-          secondary: Colors.blue[200],
+          secondary: Color.fromARGB(255, 212, 226, 232) ,
         ),
 
         textTheme: TextTheme(
@@ -108,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _openEditModal(String id, String name, String email, DateTime date, String number, String document) {
     idOnEdit = id;
     showModalBottomSheet(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       context: context,
       isScrollControlled: true,
       builder: (_) {
@@ -118,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       context: context,
       isScrollControlled: true,
       builder: (_) {
@@ -158,6 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),

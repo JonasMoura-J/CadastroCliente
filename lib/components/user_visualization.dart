@@ -56,12 +56,18 @@ class UserVisualization extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(), 
-                  child: const Text(
-                    'Fechar',
-                    style: TextStyle(color: Colors.purple),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.error,
+                      ),
+                    onPressed: () => Navigator.of(context).pop(), 
+                    child: const Text(
+                      'Fechar',
+                      style: TextStyle(color: Colors.white),
+                      ),
+                  ),
                 )
               ],
             )

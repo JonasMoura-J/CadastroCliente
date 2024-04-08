@@ -56,72 +56,87 @@ class _UserEditState extends State<UserEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget> [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Nome:'
+    return Padding(
+      padding: const EdgeInsets.only(top:50, bottom: 410),
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: <Widget> [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nome:'
+                ),
               ),
-            ),
-            TextFormField(
-              controller: _numberController,
-              decoration: const InputDecoration(
-                labelText: 'Celular:'
+              TextFormField(
+                controller: _numberController,
+                decoration: const InputDecoration(
+                  labelText: 'Celular:'
+                ),
               ),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      DateFormat('dd/MM/y').format(_selectedDate)
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        DateFormat('dd/MM/y').format(_selectedDate)
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: _showDatePicker,
+                      child: const Text('Selecionar Data de nascimento'),
+                    )
+                  ],
+                ),
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email:'
+                ),
+              ),
+              TextFormField(
+                controller: _documentController,
+                decoration: const InputDecoration(
+                  labelText: 'Documento:'
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                        ),
+                      onPressed: () => _submitForm(),
+                      child: const Text(
+                        'Salvar',
+                        style: TextStyle(color: Colors.white),
+                        ),
                     ),
                   ),
-                  TextButton(
-                    onPressed: _showDatePicker,
-                    child: const Text('Selecionar Data de nascimento'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                        ),
+                      onPressed: () => Navigator.of(context).pop(), 
+                      child: const Text(
+                        'Fechar',
+                        style: TextStyle(color: Colors.white),
+                        ),
+                    ),
                   )
                 ],
-              ),
-            ),
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email:'
-              ),
-            ),
-            TextFormField(
-              controller: _documentController,
-              decoration: const InputDecoration(
-                labelText: 'Documento:'
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => _submitForm(),
-                  child: const Text(
-                    'Salvar',
-                    style: TextStyle(color: Colors.purple),
-                    ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(), 
-                  child: const Text(
-                    'Fechar',
-                    style: TextStyle(color: Colors.purple),
-                    ),
-                )
-              ],
-            )
-          ]
+              )
+            ]
+          ),
         ),
       ),
     );
